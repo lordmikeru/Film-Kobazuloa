@@ -117,15 +117,15 @@
                     </li>
                     <li><a href="aktoreak.php">AKTOREAK</a></li>
                     <li><a href="zuzendariak.php">ZUZENDARIAK</a></li>
-                    <li class="konektatu"><a href="erregistroa.php">ERREGISTRATU</a></li>
-                    <?php
+                    <?php                     
                         if (isset($_SESSION["logged_user"]))
                         { // LOGEATUTA
                             printf("<li class='konektatu'><a href=\"login.php\">IRTEN (<b>".($_SESSION['logged_user'])."</b>)</a></li>");
                         }
                         else
                         { // LOGEATU GABE
-                            printf('<li class="konektatu"><a href="login.php">KONEKTATU</a></li>');
+                            printf('<li class="konektatu"><a href="erregistroa.php">ERREGISTRATU</a></li>
+                                <li class="konektatu"><a href="login.php">KONEKTATU</a></li>');
                         }
                     ?>
 

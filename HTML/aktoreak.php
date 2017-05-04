@@ -119,15 +119,15 @@
                     </li>
                     <li><a class="is-active" href="aktoreak.php">AKTOREAK</a></li>
                     <li><a href="zuzendariak.php">ZUZENDARIAK</a></li>
-                    <li class="konektatu"><a href="erregistroa.php">ERREGISTRATU</a></li>
-                    <?php
+                    <?php                     
                         if (isset($_SESSION["logged_user"]))
                         { // LOGEATUTA
                             printf("<li class='konektatu'><a href=\"login.php\">IRTEN (<b>".($_SESSION['logged_user'])."</b>)</a></li>");
                         }
                         else
                         { // LOGEATU GABE
-                            printf('<li class="konektatu"><a href="login.php">KONEKTATU</a></li>');
+                            printf('<li class="konektatu"><a href="erregistroa.php">ERREGISTRATU</a></li>
+                                <li class="konektatu"><a href="login.php">KONEKTATU</a></li>');
                         }
                     ?>
 
@@ -166,36 +166,26 @@
                 if(isset($_SESSION["logged_user"]))
                 {     // LOGEATUTA
                   ?>
-
-                  <!-- FORMULARIOA HASIERATU -->
-              <script>
-                  hasieratu();  // Orria kargatzerakoan hasieratu beti
-                  function hasieratu()
-                  {
-                      document.getElementById("Username").focus();
-                  }
-              </script>
-              <!-- ./hasieratu -->
                     
                     <h1> AKTOREA GEHITU </h1>
                             <div class="formularioa">
                               <table>
-                                  <form action="aktoreak.php" method="post" onsubmit="balidatu()"> 
+                                  <form action="php/intsertatu.php?orrialdea=aktoreak" method="post"> 
                                       <tr>
-                                         <td>Izena: </td> <td><input type="text" name="a_name" value="IZENA"></td>
+                                         <td>Izena: </td> <td><input type="text" name="a_name" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Abizena: </td> <td><input type="text" name="a_surname" value="ABIZENA"></td>
+                                         <td>Abizena: </td> <td><input type="text" name="a_surname" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Adina: </td> <td><input type="text" name="a_age" value="ADINA"></td>
+                                         <td>Adina: </td> <td><input type="text" name="a_age" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Bizilekua: </td> <td><input type="text" name="a_address" value="BIZILEKUA"></td>
+                                         <td>Bizilekua: </td> <td><input type="text" name="a_address" value=""></td>
                                       </tr>
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
-                                        <td><input type="submit" value="GEHITU"></td>                                                                             
+                                        <td><input type="submit" value="GEHITU"></td>
                                       </tr>
                                   </form>
                               </table>
@@ -203,7 +193,6 @@
 
 							<!-- FORMULARIOA BALIDAZIOA -->
 				              <script>
-				                  balidatu();  // Orria kargatzerakoan hasieratu beti
 				                  function balidatu()
 				                  {
 				                      if(
@@ -215,7 +204,7 @@
 				                      {
 				                      	</script>
 
-				                      		<h2> asdf </h2>
+				                      		Gaizki!
 				                      	
 				                      	<script>
 				                      }

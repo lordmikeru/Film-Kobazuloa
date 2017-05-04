@@ -28,7 +28,7 @@
       {
           header("Location: ../erregistroa.php?erregistro_erantzuna=gaizki&&pass_motza=bai");
       }
-      else {
+      else {  // ERREGISTROA ONDO
           mysqli_query($linka, "INSERT INTO erabiltzailea (Izena, Pasahitza) VALUES ('$id', '$pass')");
   		    header("Location: ../erregistroa.php?erregistro_erantzuna=ongi&&erab=$id");
       }

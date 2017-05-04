@@ -13,7 +13,7 @@
 
 <?php
 
-	include("php/DB_Konektatu.php");
+	include("DB_Konektatu.php");
     $linka=connectDataBase();
 
     $orria=$_GET['url'];
