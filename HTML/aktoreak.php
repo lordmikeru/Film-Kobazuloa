@@ -1,4 +1,6 @@
+
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 
 <!-- SESIOA -->
 <?php
@@ -164,17 +166,32 @@
                 if(isset($_SESSION["logged_user"]))
                 {     // LOGEATUTA
                   ?>
-                  
+
+                  <!-- FORMULARIOA HASIERATU -->
+              <script>
+                  hasieratu();  // Orria kargatzerakoan hasieratu beti
+                  function hasieratu()
+                  {
+                      document.getElementById("Username").focus();
+                  }
+              </script>
+              <!-- ./hasieratu -->
                     
                     <h1> AKTOREA GEHITU </h1>
                             <div class="formularioa">
                               <table>
                                   <form action="aktoreak.php" method="post"> 
                                       <tr>
-                                         <td>Izena: </td> <td><input type="text" name="name"></td>
+                                         <td>Izena: </td> <td><input type="text" name="a_name" value="IZENA"></td>
                                       </tr>
                                       <tr>
-                                         <td>Abizena: </td> <td><input type="text" name="surname"></td>
+                                         <td>Abizena: </td> <td><input type="text" name="a_surname" value="ABIZENA"></td>
+                                      </tr>
+                                      <tr>
+                                         <td>Adina: </td> <td><input type="text" name="a_age" value="ADINA"></td>
+                                      </tr>
+                                      <tr>
+                                         <td>Bizilekua: </td> <td><input type="text" name="a_address" value="BIZILEKUA"></td>
                                       </tr>
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
@@ -183,6 +200,28 @@
                                   </form>
                               </table>
                             </div>  
+
+							<!-- FORMULARIOA BALIDAZIOA -->
+				              <script>
+				                  balidatu();  // Orria kargatzerakoan hasieratu beti
+				                  function balidatu()
+				                  {
+				                      if(
+				                      	 (document.getElementById("a_name").value == "") || 
+			                      		 (document.getElementById("a_surname").value == "") || 
+			                      		 (document.getElementById("a_age").value == "") || 
+			                      		 (document.getElementById("a_address").value == "")
+			                      		)
+				                      {
+				                      	</script>
+
+				                      		<h2> asdf </h2>
+				                      	
+				                      	<script>
+				                      }
+				                  }
+				              </script>
+				              <!-- ./formulario balidazioa -->
 
                  <?php
                       }
