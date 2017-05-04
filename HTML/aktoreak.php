@@ -180,7 +180,7 @@
                     <h1> AKTOREA GEHITU </h1>
                             <div class="formularioa">
                               <table>
-                                  <form action="aktoreak.php" method="post"> 
+                                  <form action="aktoreak.php" method="post" onsubmit="balidatu()"> 
                                       <tr>
                                          <td>Izena: </td> <td><input type="text" name="a_name" value="IZENA"></td>
                                       </tr>
