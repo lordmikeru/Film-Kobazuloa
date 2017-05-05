@@ -170,7 +170,7 @@
                     <h1> AKTOREA GEHITU </h1>
                             <div class="formularioa">
                               <table>
-                                  <form name="form_aktorea_gehitu" action="php/intsertatu.php?orrialdea=aktoreak" method="post"> 
+                                  <form action="php/intsertatu.php?orrialdea=aktoreak" method="post"> 
                                       <tr>
                                          <td>Izena: </td> <td><input type="text" name="a_name" value=""></td>
                                       </tr>
@@ -186,14 +186,13 @@
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
                                         <td><input type="submit" value="GEHITU"></td>
-                                        <!-- <td><input type="button" value="GEHITU" onclick="balidatu()"></td> -->
                                       </tr>
                                   </form>
                               </table>
-                            </div>
+                            </div>  
 
 							<!-- FORMULARIOA BALIDAZIOA -->
-				              <!-- <script>
+				              <script>
 				                  function balidatu()
 				                  {
 				                      if(
@@ -203,20 +202,19 @@
 			                      		 (document.getElementById("a_address").value == "")
 			                      		)
 				                      {
-                                  document.getElementById("a_address").value == "asdf";
+				                      	</script>
+
+				                      		Gaizki!
+				                      	
+				                      	<script>
 				                      }
-                              else
-                              {
-                                  document.getElementById("form_aktorea_gehitu").submit();
-                                  document.getElementById("a_name").value == "ongi!";
-                              }
 				                  }
-				              </script> -->
+				              </script>
 				              <!-- ./formulario balidazioa -->
 
-           <?php
-                } # ./if (logged) aktorea gehitu
-           ?>
+                 <?php
+                      }
+                 ?>
 
 <!-- ./insert formularioa -->
 
