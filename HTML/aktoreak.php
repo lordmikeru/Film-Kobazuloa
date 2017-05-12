@@ -166,22 +166,31 @@
                 if(isset($_SESSION["logged_user"]))
                 {     // LOGEATUTA
                   ?>
+
+					<h1> <?php 
+
+						if(isset($_GET['abc']))
+							echo $_GET['abc'];
+
+					 ?> </h1>                    
                     
+
+
                     <h1> AKTOREA GEHITU </h1>
                             <div class="formularioa">
                               <table>
-                                  <form action="php/intsertatu.php?orrialdea=aktoreak" method="post"> 
+                                  <form id="f_aktorea_gehitu" action="php/intsertatu_aktoreak.php" method="post" onsubmit="return balidatu()"> 
                                       <tr>
-                                         <td>Izena: </td> <td><input type="text" name="a_name" value=""></td>
+                                         <td>Izena: </td> <td><input type="text" id ="a_name" name="a_name" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Abizena: </td> <td><input type="text" name="a_surname" value=""></td>
+                                         <td>Abizena: </td> <td><input type="text" id ="a_surname" name="a_surname" value="" required></td>
                                       </tr>
                                       <tr>
-                                         <td>Adina: </td> <td><input type="text" name="a_age" value=""></td>
+                                         <td>Adina: </td> <td><input type="number" id ="a_age" name="a_age" value="" required></td>
                                       </tr>
                                       <tr>
-                                         <td>Bizilekua: </td> <td><input type="text" name="a_address" value=""></td>
+                                         <td>Bizilekua: </td> <td><input type="text" id ="a_address" name="a_address" value="" required></td>
                                       </tr>
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
@@ -191,30 +200,45 @@
                               </table>
                             </div>  
 
-							<!-- FORMULARIOA BALIDAZIOA -->
+
+                          	<p id="error_izena"></p>
+
+							<!-- FORMULARIOA BALIDAZIOA (KLIENTE ALDETIK) -->
 				              <script>
+
 				                  function balidatu()
 				                  {
-				                      if(
-				                      	 (document.getElementById("a_name").value == "") || 
-			                      		 (document.getElementById("a_surname").value == "") || 
-			                      		 (document.getElementById("a_age").value == "") || 
-			                      		 (document.getElementById("a_address").value == "")
-			                      		)
-				                      {
-				                      	</script>
-
-				                      		Gaizki!
-				                      	
-				                      	<script>
-				                      }
+				                      if( (document.getElementById("a_name").value.length == 0) )
+			                      		{
+				                      		alert("Gaizki ostia!");
+				                      		document.getElementById("error_izena").innerHTML = "Gaizkiiii";
+				                      		return false;
+			                      		}
+			                      		else
+			                      		{
+			                      			alert("ONdo");
+			                      			return true;
+			                      		}
+				                      	//  || 
+			                      		//  (document.getElementById("a_surname").text() == "") || 
+			                      		//  (document.getElementById("a_age").text() == "") || 
+			                      		//  (document.getElementById("a_address").text() == "")
+			                      		// )
+				                      
+				                      // else
+				                      // {
+				                      // 		// document.getElementById("f_aktorea_gehitu").submit();
+				                      // 		//document.write("ondo");
+				                      // 		alert("Gaizki ostia!");
+				                      // 		return true;
+				                      // }
 				                  }
 				              </script>
 				              <!-- ./formulario balidazioa -->
 
-                 <?php
-                      }
-                 ?>
+             <?php
+                	}
+             ?>
 
 <!-- ./insert formularioa -->
 

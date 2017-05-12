@@ -17,7 +17,7 @@
   include("DB_Konektatu.php");
   $linka=connectDataBase();
 
-  $orria=$_GET["orrialdea"];
+  $orria=$_POST["orrialdea"];
   // ORRIALDEAREN ARABERA OBJETU EZBERDINAK GEHITU TAULAN
   switch ($orria) {
 
