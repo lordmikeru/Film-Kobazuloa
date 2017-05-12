@@ -155,6 +155,90 @@
 <!-- KONTSULTA -->
 
 
+
+
+
+
+<!-- INSERT FORMULARIOA -->
+
+              <?php
+
+                if(isset($_SESSION["logged_user"]))
+                {     // LOGEATUTA
+                  ?>     
+                    
+
+                    <h1> AKTOREA GEHITU </h1>
+                            <div class="formularioa">
+                              <table>
+                                  <form id="f_aktorea_gehitu" action="php/intsertatu_aktoreak.php" method="post" onsubmit="return balidatu()"> 
+                                      <tr>
+                                         <td>Izena: </td> <td><input type="text" id ="a_name" name="a_name" value=""></td>
+                                      </tr>
+                                      <tr>
+                                         <td>Abizena: </td> <td><input type="text" id ="a_surname" name="a_surname" value=""></td>
+                                      </tr>
+                                      <tr>
+                                         <td>Adina: </td> <td><input type="number" id ="a_age" name="a_age" value=""></td>
+                                      </tr>
+                                      <tr>
+                                         <td>Bizilekua: </td> <td><input type="text" id ="a_address" name="a_address" value=""></td>
+                                      </tr>
+                                      <tr>
+                                        <td><input type="reset" value="Garbitu"></td>
+                                        <td><input type="submit" value="GEHITU"></td>
+                                      </tr>
+                                  </form>
+                              </table>                              
+                              <h3 id="error"></h3>    
+                              <p id="error_izena"></p>    
+                            </div>  
+
+                            
+
+              <!-- FORMULARIOA BALIDAZIOA (KLIENTE ALDETIK) -->
+                      <script>
+
+                          function balidatu()
+                          {
+                            // GEHIKUNTZA GAIZKI
+                              if( (document.getElementById("a_name").value.length == 0) ||
+                                  (document.getElementById("a_surname").value.length == 0) ||
+                                  (document.getElementById("a_age").value.length == 0) ||
+                                  (document.getElementById("a_address").value.length == 0)
+                                )
+                                {
+                                    alert("Eremu guztiak bete!");
+                                    document.getElementById("error").innerHTML = "<u>ERROREA</u>";
+                                    document.getElementById("error_izena").innerHTML = "Eremu guztiak bete, mesedez.";
+                                    return false;   // Ez da SUBMIT egingo.
+                                }
+                              if(
+                                  (!isNaN(document.getElementById("a_name").value)) ||
+                                  (!isNaN(document.getElementById("a_surname").value)) ||
+                                  (!isNaN(document.getElementById("a_address").value))
+                                  )
+                              {                                  
+                                  alert("Ez idatzi zenbakirik!");
+                                  return false;
+                              }
+
+                            // GEHIKUNTZA ONDO
+                                  alert("Aktore berria gehitu da.");
+                                  return true;    // SUBMIT egingo da.
+                          }
+                      </script>
+                      <!-- ./formulario balidazioa -->
+
+             <?php
+                  }  // ./if(logeatua)
+             ?>
+
+<!-- ./insert formularioa -->
+
+
+
+
               <!-- BILAKETA FORMULARIOA -->
               <div class="formularioa">
                 <table>

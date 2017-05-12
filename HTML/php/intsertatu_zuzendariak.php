@@ -34,6 +34,6 @@
 
   mysqli_close($linka);
 
-  header("Location: ../aktoreak.php#aktore_lista");
+  header("Location: ../aktoreak.php");
 
 ?>

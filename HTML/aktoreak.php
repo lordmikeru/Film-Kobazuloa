@@ -166,13 +166,7 @@
                 if(isset($_SESSION["logged_user"]))
                 {     // LOGEATUTA
                   ?>
-
-					<h1> <?php 
-
-						if(isset($_GET['abc']))
-							echo $_GET['abc'];
-
-					 ?> </h1>                    
+              
                     
 
 
@@ -184,60 +178,62 @@
                                          <td>Izena: </td> <td><input type="text" id ="a_name" name="a_name" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Abizena: </td> <td><input type="text" id ="a_surname" name="a_surname" value="" required></td>
+                                         <td>Abizena: </td> <td><input type="text" id ="a_surname" name="a_surname" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Adina: </td> <td><input type="number" id ="a_age" name="a_age" value="" required></td>
+                                         <td>Adina: </td> <td><input type="number" id ="a_age" name="a_age" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Bizilekua: </td> <td><input type="text" id ="a_address" name="a_address" value="" required></td>
+                                         <td>Bizilekua: </td> <td><input type="text" id ="a_address" name="a_address" value=""></td>
                                       </tr>
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
                                         <td><input type="submit" value="GEHITU"></td>
                                       </tr>
                                   </form>
-                              </table>
+                              </table>                              
+                              <h3 id="error"></h3>    
+                              <p id="error_izena"></p>    
                             </div>  
 
-
-                          	<p id="error_izena"></p>
+                            
 
 							<!-- FORMULARIOA BALIDAZIOA (KLIENTE ALDETIK) -->
 				              <script>
 
 				                  function balidatu()
 				                  {
-				                      if( (document.getElementById("a_name").value.length == 0) )
+                            // GEHIKUNTZA GAIZKI
+				                      if( (document.getElementById("a_name").value.length == 0) ||
+                                  (document.getElementById("a_surname").value.length == 0) ||
+                                  (document.getElementById("a_age").value.length == 0) ||
+                                  (document.getElementById("a_address").value.length == 0)
+                                )
 			                      		{
-				                      		alert("Gaizki ostia!");
-				                      		document.getElementById("error_izena").innerHTML = "Gaizkiiii";
-				                      		return false;
+  				                      		alert("Eremu guztiak bete!");
+                                    document.getElementById("error").innerHTML = "<u>ERROREA</u>";
+                                    document.getElementById("error_izena").innerHTML = "Eremu guztiak bete, mesedez.";
+  				                      		return false;   // Ez da SUBMIT egingo.
 			                      		}
-			                      		else
-			                      		{
-			                      			alert("ONdo");
-			                      			return true;
-			                      		}
-				                      	//  || 
-			                      		//  (document.getElementById("a_surname").text() == "") || 
-			                      		//  (document.getElementById("a_age").text() == "") || 
-			                      		//  (document.getElementById("a_address").text() == "")
-			                      		// )
-				                      
-				                      // else
-				                      // {
-				                      // 		// document.getElementById("f_aktorea_gehitu").submit();
-				                      // 		//document.write("ondo");
-				                      // 		alert("Gaizki ostia!");
-				                      // 		return true;
-				                      // }
+                              if(
+                                  (!isNaN(document.getElementById("a_name").value)) ||
+                                  (!isNaN(document.getElementById("a_surname").value)) ||
+                                  (!isNaN(document.getElementById("a_address").value))
+                                  )
+                              {                                  
+                                  alert("Ez idatzi zenbakirik!");
+                                  return false;
+                              }
+
+                            // GEHIKUNTZA ONDO
+			                      			alert("Aktore berria gehitu da.");
+			                      			return true;    // SUBMIT egingo da.
 				                  }
 				              </script>
 				              <!-- ./formulario balidazioa -->
 
              <?php
-                	}
+                	}  // ./if(logeatua)
              ?>
 
 <!-- ./insert formularioa -->
@@ -269,7 +265,7 @@
               <!-- KONEKTATU DATU BASEAREKIN -->
                 <?php
                   include("php/DB_Konektatu.php");
-                  $linka=connectDataBase();	# we are calling to the function 'connectDataBase' from the 'DB_Konektatu' php file
+                  $linka=connectDataBase();
 
                   // BILAKETA EGIN NAHI DA FORMULARIOTIK
                   if (isset($_GET["bilatu_aktorea_izena"]) || (isset($_GET["bilatu_aktorea_abizena"])))
@@ -331,39 +327,48 @@
               <?php
 
                 if(isset($aktore_kontsulta) && $aktore_kontsulta=="bai")
-                {
-                  printf("<TABLE  class='taula'>
+                {     // AKTOREAREN datuak
+                  printf("<TABLE id='aktore_lista' class='taula'>
                           <tr>
-                            <th>Id</th><th>Izena</th><th>Abizena</th><th>Adina</th><th>Bizilekua</th><th class='filmografia'>Filmak</th>
+                            <th class='filmografia'></th> <th>Id</th> <th>Izena</th> <th>Abizena</th> <th>Adina</th> <th>Bizilekua</th> <th class='filmografia'>Info</th> <th class='filmografia'> Filmak </th> 
                           </tr>");
                 }
-                else {
-                  printf("<TABLE  class='taula'>
+                else {  // AKTOREAREN FILMOGRAFIA
+                  printf("<TABLE id='aktore_lista' class='taula'>
                           <tr>
                             <th>Id</th><th>Izena</th><th>Mota</th><th>Zuzendaria</th><th>Protagonista</th><th>Urtea</th><th class='filmografia'>Filmak</th>
                           </tr>");
                 }
 
-                  $link_argazki="assets/images/aktoreak/linka_logoa.png";
+                  $link_argazki_filmografia="assets/images/aktoreak/linka_logoa.png";
+                  $link_argazki_zaborra="assets/images/zaborra.png";
+                  $link_argazki_botoia="assets/images/botoia.png";
+
                   while($erregistroa = mysqli_fetch_array($kontsulta_emaitza))	# erregistrotan banatu
                   {
                     // AKTORE GUZTIEN KONTSULTA
                     if($aktore_kontsulta=="bai")
                     {
                         $aktoreid=$erregistroa["Id"];
-                        printf("<tr> <td> %d </td>
+                        printf("<tr> 
+                                     <td> <a href='php/ezabatu_aktoreak.php?kill=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
+                                     <td> %d </td>
                                      <td> %s </td>
                                      <td> %s </td>
                                      <td> %d </td>
                                      <td> %s </td>
+                                     <td class='filmografia'> <a href='fitxa_aktorea.php?akt=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
                                      <td class='filmografia'> <a href='aktoreak.php?aktore_espezifikoa=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
-                                </tr>",
+                                </tr>",                                    
+                                    $link_argazki_zaborra,
                                     $erregistroa["Id"],
                                     $erregistroa["Izena"],
                                     $erregistroa["Abizena"],
                                     $erregistroa["Adina"],
                                     $erregistroa["Bizilekua"],
-                                    $link_argazki);
+                                    $link_argazki_botoia,
+                                    $link_argazki_filmografia
+                                    );
                     }
                     // AKTORE BATEN FILMOGRAFIA KONTSULTA
                     else{
