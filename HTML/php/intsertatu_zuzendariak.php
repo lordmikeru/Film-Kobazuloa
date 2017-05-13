@@ -17,13 +17,13 @@
   include("DB_Konektatu.php");
   $linka=ConnectDataBase();
 
-  $a_izena = $_POST["a_name"];
-  $a_abiz = $_POST["a_surname"];
-  $a_adina = $_POST["a_age"];
-  $a_bizi = $_POST["a_address"];
+  $z_izena = $_POST["d_name"];
+  $z_abiz = $_POST["d_surname"];
+  $z_adina = $_POST["d_age"];
+  $z_bizi = $_POST["d_address"];
             
 
-  $intserzioa= "INSERT INTO `aktorea` (`Izena`, `Abizena`, `Adina`, `Bizilekua`) VALUES ('$a_izena', '$a_abiz', '$a_adina', '$a_bizi')";
+  $intserzioa= "INSERT INTO `zuzendaria` (`Izena`, `Abizena`, `Adina`, `Bizilekua`) VALUES ('$z_izena', '$z_abiz', '$z_adina', '$z_bizi')";
   mysqli_query($linka, $intserzioa);
   
   if(!mysqli_query)
@@ -34,6 +34,6 @@
 
   mysqli_close($linka);
 
-  header("Location: ../aktoreak.php");
+  header("Location: ../zuzendariak.php");
 
 ?>

@@ -168,30 +168,32 @@
                   ?>     
                     
 
-                    <h1> AKTOREA GEHITU </h1>
+                    <h1> ZUZENDARIA GEHITU </h1>
                             <div class="formularioa">
                               <table>
-                                  <form id="f_aktorea_gehitu" action="php/intsertatu_aktoreak.php" method="post" onsubmit="return balidatu()"> 
+                                  <form id="f_aktorea_gehitu" action="php/intsertatu_zuzendariak.php" method="post" onsubmit="return balidatu()"> 
                                       <tr>
-                                         <td>Izena: </td> <td><input type="text" id ="a_name" name="a_name" value=""></td>
+                                         <td>Izena: </td> <td><input type="text" id ="d_name" name="d_name" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Abizena: </td> <td><input type="text" id ="a_surname" name="a_surname" value=""></td>
+                                         <td>Abizena: </td> <td><input type="text" id ="d_surname" name="d_surname" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Adina: </td> <td><input type="number" id ="a_age" name="a_age" value=""></td>
+                                         <td>Adina: </td> <td><input type="number" id ="d_age" name="d_age" value=""></td>
                                       </tr>
                                       <tr>
-                                         <td>Bizilekua: </td> <td><input type="text" id ="a_address" name="a_address" value=""></td>
+                                         <td>Bizilekua: </td> <td><input type="text" id ="d_address" name="d_address" value=""></td>
                                       </tr>
                                       <tr>
                                         <td><input type="reset" value="Garbitu"></td>
                                         <td><input type="submit" value="GEHITU"></td>
                                       </tr>
                                   </form>
-                              </table>                              
+                              </table>      
+
                               <h3 id="error"></h3>    
                               <p id="error_izena"></p>    
+
                             </div>  
 
                             
@@ -202,10 +204,10 @@
                           function balidatu()
                           {
                             // GEHIKUNTZA GAIZKI
-                              if( (document.getElementById("a_name").value.length == 0) ||
-                                  (document.getElementById("a_surname").value.length == 0) ||
-                                  (document.getElementById("a_age").value.length == 0) ||
-                                  (document.getElementById("a_address").value.length == 0)
+                              if( (document.getElementById("d_name").value.length == 0) ||
+                                  (document.getElementById("d_surname").value.length == 0) ||
+                                  (document.getElementById("d_age").value.length == 0) ||
+                                  (document.getElementById("d_address").value.length == 0)
                                 )
                                 {
                                     alert("Eremu guztiak bete!");
@@ -214,9 +216,9 @@
                                     return false;   // Ez da SUBMIT egingo.
                                 }
                               if(
-                                  (!isNaN(document.getElementById("a_name").value)) ||
-                                  (!isNaN(document.getElementById("a_surname").value)) ||
-                                  (!isNaN(document.getElementById("a_address").value))
+                                  (!isNaN(document.getElementById("d_name").value)) ||
+                                  (!isNaN(document.getElementById("d_surname").value)) ||
+                                  (!isNaN(document.getElementById("d_address").value))
                                   )
                               {                                  
                                   alert("Ez idatzi zenbakirik!");
@@ -224,7 +226,7 @@
                               }
 
                             // GEHIKUNTZA ONDO
-                                  alert("Aktore berria gehitu da.");
+                                  alert("Zuzendari berria gehitu da.");
                                   return true;    // SUBMIT egingo da.
                           }
                       </script>
@@ -240,6 +242,7 @@
 
 
               <!-- BILAKETA FORMULARIOA -->
+              <h1> ZUZENDARIA BILATU </h1>
               <div class="formularioa">
                 <table>
                     <form action="zuzendariak.php" method="get">	<!-- 'pasahitza' ez ikusteko, POST -->
@@ -322,13 +325,13 @@
 
                 if(isset($zuzendari_kontsulta) && $zuzendari_kontsulta=="bai")
                 {
-                  printf("<TABLE  class='taula'>
+                  printf("<TABLE id='zuzendari_lista'  class='taula'>
                           <tr>
                             <th>Id</th><th>Izena</th><th>Abizena</th><th>Adina</th><th>Bizilekua</th><th class='filmografia'>Filmak</th>
                           </tr>");
                 }
                 else {
-                  printf("<TABLE  class='taula'>
+                  printf("<TABLE id='zuzendari_lista' class='taula'>
                           <tr>
                             <th>Id</th><th>Izena</th><th>Mota</th><th>Zuzendaria</th><th>Protagonista</th><th>Urtea</th><th class='filmografia'>Filmak</th>
                           </tr>");
