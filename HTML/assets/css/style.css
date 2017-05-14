@@ -1096,3 +1096,14 @@ form .alert {
 .formularioa {
   padding: 40px;
 }
+
+/* FITXAK */
+.fitxa_textua {
+  padding: 30px;
+}
+.fitxa_textua img {
+  float: right;
+}
+/*.fitxa_textua iframe {
+  padding: 50px;
+}*/

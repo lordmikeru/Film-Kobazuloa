@@ -1,17 +1,29 @@
+
+
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!-- SESIOA -->
 <?php
-   
-        session_start();
     
+    session_start(); 
+
+    if (isset ($_GET["login_erantzuna"]))
+    {
+      // LOGIN GAIZKI
+      if ($_GET["login_erantzuna"] == "gaizki")
+      {
+          echo "Erabiltzailea edo Pasahitza gaizki sartu duzu!";
+      }
+     // LOGIN ONDO
+      else
+      {
+          $_SESSION["logged_user"] = $_GET['erab'];
+      }
+   }
+        
 ?>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-
-
-
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -106,7 +118,7 @@
 
                   <ul class="nav navbar-nav">
 
-                    <li><a class="is-active" href="index.php">HASIERA</a></li>
+                    <li><a href="index.php">HASIERA</a></li>
                     <li class="has-child"><a href="filmak.php">FILMAK</a>
                       <ul class="submenu">
                          <li class="submenu-item"><a href="filmak.php?mota=akzioa">Akzioa </a></li>
@@ -128,7 +140,6 @@
                                 <li class="konektatu"><a href="login.php">KONEKTATU</a></li>');
                         }
                     ?>
-
                   </ul>
 
                 </div> <!-- /#navbar -->
@@ -143,85 +154,61 @@
     </header> <!-- /. main-header -->
 
 
-
-
 <!-- ONGI ETORRIA (HASIERA) -->
     <div class="section-home home-reasons">
         <div class="container">
             <div class="row">
-              <div class="parrafoa">
-              <h3 id=ongietorri><u>Ongi etorri <b>Film Kobazulo</b>ra!</u></h3>
-              <p>Geure helburua filmak gustoko dituen jendeari informazioa eskaintzea da.</p>
-              <p>Orrialdearen goikaldean dituzu gai ezberdinak: Filmak, Aktoreak eta Zuzendarien informazioa.</p>
-              <br/>
-              <p><b>Film Kobazuloa</b>ren parte izan nahi baduzu, joan <b>Erregistro</b> atalera, edo egin klik <a href=# class="hemen"><i>hemen</i></a> !</p>
-              <p>Jada gure erreinukoa bazara, zure kontuarekin <b>Konektatu</b> zaitezke <a href=# class="hemen"><i>hemen</i></a> !</p>
-            </div>
+
+
+              <!-- DATU BASEAREKIN KONEKTATU -->
+              <?php
+                  include("php/DB_Konektatu.php");
+                  $linka=ConnectDataBase();
+              ?>
+
+              <!-- AKTOREAREN FITXA KONTSULTA -->
+              <?php
+
+              		$aktoreid = $_GET["akt"];
+
+          // $kontsulta_aktorea=mysqli_query($linka, "SELECT Izena, Abizena FROM aktorea WHERE id=".$_GET["aktore_espezifikoa"]."");
+          // $kontsulta_aktorea_datuak=mysqli_fetch_array($kontsulta_aktorea);
+
+					$datu_erregistroa=mysqli_query($linka, "SELECT * FROM aktorea WHERE Id='$aktoreid'");
+					$erregistroa=mysqli_fetch_array($datu_erregistroa)
+					
+			  ?>
+    						<h1>
+    							<?php 
+    								echo $erregistroa["Izena"], " ", $erregistroa["Abizena"];
+                    echo " [AKTOREA]";
+    							?>
+    						</h1>
+
+    						<div class="fitxa_textua">
+
+    							<!-- <img src=" -->
+                    <?php 
+                        //echo $row["imagen"];
+                    ?>
+                    <!-- " height="300" width="200"> -->
+
+    								Adina: <?php 
+                              echo $erregistroa["Adina"];
+                           ?>                    
+
+
+
+    						</div>  <!-- ./div(fitxa_textua) -->
+			<?php 
+					 	// ./while(fetch_array(erregistroak))
+              ?>
+
+
             </div>
         </div>
     </div> <!-- /.home-reasons -->
 <!-- /. ongi etorria (HASIERA) -->
-
-<!-- FILM GENEROAK -->
-    <div class="section-home our-causes animate-onscroll fadeIn">
-        <div class="container">
-            <h2 class="title-style-1">FILMAK <span class="title-under"></span></h2>
-            <div class="row">
-              <!-- AKZIOA -->
-                <div class="col-md-3 col-sm-6">
-                    <div class="cause">
-                        <img src="assets/images/film_generoak/akzioa.jpg" alt="" class="cause-img">
-                        <h4 class="cause-title"><a href="#">AKZIOA </a></h4>
-                        <div class="cause-details">
-                            Akzioaren zalea zara?!<br/>Hemen aurkituko dituzu Ranboren film onenak, Arnold Schwarzenegger-en beso gihartsuak eta askoz ere gehiago!
-                        </div>
-                        <div class="btn-holder text-center">
-                          <a href="#" class="btn btn-primary"> JOAN</a>
-                        </div>
-                    </div> <!-- /.cause -->
-                </div>
-                <!-- DRAMA -->
-                  <div class="col-md-3 col-sm-6">
-                      <div class="cause">
-                          <img src="assets/images/film_generoak/drama.jpg" alt="" class="cause-img">
-                          <h4 class="cause-title"><a href="#">DRAMA </a></h4>
-                          <div class="cause-details">
-                              Film dramatikoak gustoko badituzu, hemen dago zure txokoa.
-                          </div>
-                          <div class="btn-holder text-center">
-                            <a href="#" class="btn btn-primary"> JOAN</a>
-                          </div>
-                      </div> <!-- /.cause -->
-                  </div>
-                    <!-- FANTASIA -->
-                      <div class="col-md-3 col-sm-6">
-                          <div class="cause">
-                              <img src="assets/images/film_generoak/fantasia.jpg" alt="" class="cause-img">
-                              <h4 class="cause-title"><a href="#">FANTASIA </a></h4>
-                              <div class="cause-details">
-                                  Ez dago fantasiazko film bat baino hoberik arratsaldea pasatzeko.
-                              </div>
-                              <div class="btn-holder text-center">
-                                <a href="#" class="btn btn-primary"> JOAN</a>
-                              </div>
-                          </div> <!-- /.cause -->
-                      </div>
-                      <!-- ZIENTZIA-FIKZIOA -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="cause">
-                                <img src="assets/images/film_generoak/zientzia_fikzioa.jpg" alt="" class="cause-img">
-                                <h4 class="cause-title"><a href="#">ZIENTZIA-FIKZIOA </a></h4>
-                                <div class="cause-details">
-                                    Zer da erreala eta zer ez? Zientzia-fikzioa gustoko baduzu sartu hemen.
-                                </div>
-                                <div class="btn-holder text-center">
-                                  <a href="#" class="btn btn-primary"> JOAN</a>
-                                </div>
-                            </div> <!-- /.cause -->
-                        </div>
-            </div>
-        </div>
-    </div> <!-- /.our-causes -->
 
 
 <!-- FOOTER-A -->

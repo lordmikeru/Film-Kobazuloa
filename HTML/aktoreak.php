@@ -328,13 +328,24 @@
 
                 if(isset($aktore_kontsulta) && $aktore_kontsulta=="bai")
                 {     // AKTOREAREN datuak
-                  printf("<TABLE id='aktore_lista' class='taula'>
+                    if(isset($_SESSION["logged_user"]))
+                    {     // LOGEATUTA
+                        printf("<TABLE id='aktore_lista' class='taula'>
                           <tr>
                             <th class='filmografia'></th> <th>Id</th> <th>Izena</th> <th>Abizena</th> <th>Adina</th> <th>Bizilekua</th> <th class='filmografia'>Info</th> <th class='filmografia'> Filmak </th> 
                           </tr>");
+                    }
+                    else
+                    {   // LOGEATU GABE
+                        printf("<TABLE id='aktore_lista' class='taula'>
+                          <tr>
+                            <th>Id</th> <th>Izena</th> <th>Abizena</th> <th>Adina</th> <th>Bizilekua</th> <th class='filmografia'>Info</th> <th class='filmografia'> Filmak </th> 
+                          </tr>");
+                    }
+                  
                 }
-                else {  // AKTOREAREN FILMOGRAFIA
-                  printf("<TABLE id='aktore_lista' class='taula'>
+                else {  // AKTOREAREN FILMOGRAFIA                    
+                    printf("<TABLE id='aktore_lista' class='taula'>
                           <tr>
                             <th>Id</th><th>Izena</th><th>Mota</th><th>Zuzendaria</th><th>Protagonista</th><th>Urtea</th><th class='filmografia'>Filmak</th>
                           </tr>");
@@ -350,14 +361,16 @@
                     if($aktore_kontsulta=="bai")
                     {
                         $aktoreid=$erregistroa["Id"];
-                        printf("<tr> 
+                        if(isset($_SESSION["logged_user"]))
+                        {   // LOGEATUTA                          
+                            printf("<tr> 
                                      <td> <a href='php/ezabatu_aktoreak.php?kill=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
                                      <td> %d </td>
                                      <td> %s </td>
                                      <td> %s </td>
                                      <td> %d </td>
                                      <td> %s </td>
-                                     <td class='filmografia'> <a href='fitxa_aktorea.php?akt=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
+                                     <td class='filmografia'> <a href='fitxa_aktoreak.php?akt=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
                                      <td class='filmografia'> <a href='aktoreak.php?aktore_espezifikoa=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
                                 </tr>",                                    
                                     $link_argazki_zaborra,
@@ -369,6 +382,27 @@
                                     $link_argazki_botoia,
                                     $link_argazki_filmografia
                                     );
+                      }
+                      else
+                      {   // LOGEATU GABE
+                          printf("<tr> 
+                                     <td> %d </td>
+                                     <td> %s </td>
+                                     <td> %s </td>
+                                     <td> %d </td>
+                                     <td> %s </td>
+                                     <td class='filmografia'> <a href='fitxa_aktoreak.php?akt=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
+                                     <td class='filmografia'> <a href='aktoreak.php?aktore_espezifikoa=$aktoreid'> <img src=%s width='20px' height='20px'> </a> </td>
+                                </tr>",                     
+                                    $erregistroa["Id"],
+                                    $erregistroa["Izena"],
+                                    $erregistroa["Abizena"],
+                                    $erregistroa["Adina"],
+                                    $erregistroa["Bizilekua"],
+                                    $link_argazki_botoia,
+                                    $link_argazki_filmografia
+                                    );
+                      }
                     }
                     // AKTORE BATEN FILMOGRAFIA KONTSULTA
                     else{

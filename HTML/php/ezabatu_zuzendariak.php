@@ -10,6 +10,6 @@
 
 	mysqli_close($linka);
 
-	header("Location: ../zuzendaria.php#zuzendari_lista");
+	header("Location: ../zuzendariak.php#zuzendari_lista");
 
 ?>
